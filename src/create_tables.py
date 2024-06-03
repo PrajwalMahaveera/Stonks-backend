@@ -1,12 +1,12 @@
 import psycopg2
 from psycopg2 import sql
-
+# I have added my postgres
 # Define your database connection parameters
 DB_NAME = 'stonks'
 DB_USER = 'postgres'
-DB_PASSWORD = 'Vathsa@12345'
+DB_PASSWORD = 'PASSWORD'
 DB_HOST = 'localhost'
-DB_PORT = '5432'  # default is 5432
+DB_PORT = '5432' 
 
 # Connect to your PostgreSQL database
 try:
@@ -39,7 +39,6 @@ try:
     print("Profiles table created successfully.")
 
     # If you need to create another table, you can add its creation query here
-    # Example:
     create_another_table_query = '''
     CREATE TABLE IF NOT EXISTS another_table (
         id SERIAL PRIMARY KEY,
