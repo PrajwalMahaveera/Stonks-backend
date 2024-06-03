@@ -4,10 +4,11 @@ const JwtStrategy = require('passport-jwt').Strategy;
 const ExtractJwt = require('passport-jwt').ExtractJwt;
 const pool = require('./db');
 const bcrypt = require('bcryptjs');
+require('dotenv').config();
 
 passport.use(new LocalStrategy({
-  usernameField: 'email',
-  passwordField: 'password'
+  usernameField: process.env.EMAIL,
+  passwordField: process.env.PASSWORD
 }, async (email, password, done) => {
   try {
     const result = await pool.query('SELECT * FROM profiles WHERE email = $1', [email]);
@@ -30,7 +31,7 @@ passport.use(new LocalStrategy({
 // JWT Strategy
 const opts = {
     jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-    secretOrKey: "abcdefghij"
+    secretOrKey: process.env.JWT_SECRET
   };
   
   passport.use(new JwtStrategy(opts, async (jwt_payload, done) => {

@@ -38,15 +38,15 @@ try:
     cursor.execute(create_profiles_table_query)
     print("Profiles table created successfully.")
 
-    # If you need to create another table, you can add its creation query here
-    create_another_table_query = '''
-    CREATE TABLE IF NOT EXISTS another_table (
-        id SERIAL PRIMARY KEY,
-        some_column VARCHAR(255) NOT NULL,
-        another_column INT NOT NULL
-    );
-    '''
-    cursor.execute(create_another_table_query)
+    # If you need to create follower table
+    create_followers_table_query = '''
+    CREATE TABLE IF NOT EXISTS followers (
+    id SERIAL PRIMARY KEY,
+    user_id INT REFERENCES profiles(id) ON DELETE CASCADE,
+    follower_id INT REFERENCES profiles(id) ON DELETE CASCADE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    );'''
+    cursor.execute(create_followers_table_query)
     print("Another table created successfully.")
 
     create_id_table_query = '''
@@ -60,13 +60,23 @@ try:
 
     
     create_channel_table_query = '''
-    CREATE TABLE channels (
+    CREATE TABLE IF NOT EXISTS channels (
     id SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     description TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     );'''
     cursor.execute(create_channel_table_query)
+
+    create_fcm_table_query = '''
+    CREATE TABLE IF NOT EXISTS fcm_tokens (
+    id SERIAL PRIMARY KEY,
+    user_id INT REFERENCES profiles(id) ON DELETE CASCADE,
+    fcm_token VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    );'''
+    cursor.execute(create_fcm_table_query)
 
 
     # cursor.execute("DELETE FROM profiles")
