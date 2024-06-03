@@ -1,0 +1,78 @@
+---Stonks Application
+
+---Overview
+This README provides an overview of the Stonks backend application.
+
+---Features
+1. User authentication with local strategy and JWT
+2. User profile management
+3. Follow and unfollow functionality
+4. Channel creation, updating, and deletion
+5. Notification system with email and Firebase Cloud Messaging (FCM)
+6. Real-time chat using Socket.IO
+7. Two-Factor Authentication (2FA) setup and verification
+
+
+---Prerequisites
+---Ensure you have the following installed:
+1. Node.js
+2. PostgreSQL
+3. npm or yarn
+
+
+---Setup
+---Environment Variables
+Create a .env file in the root directory and add the following environment variables:
+PORT=3000
+DB_USER=postgres
+DB_HOST=localhost
+DB_DATABASE=stonks
+DB_PASSWORD=your_db_password
+DB_PORT=5432
+EMAIL_USER=your_email@gmail.com
+EMAIL_PASS=your_email_password
+JWT_SECRET=your_jwt_secret
+GOOGLE_CLIENT_ID=your_google_client_id
+GOOGLE_CLIENT_SECRET=your_google_client_secret
+
+---Install Dependencies
+1. npm install
+
+---Database Setup
+1. Ensure PostgreSQL is running and create the database stonks. The necessary tables should include profiles, channels, follows, two_factor_auth, users, and fcm_tokens.
+
+Running the Application
+1. Navigate to the application and run node src/index.js
+
+----API Endpoints
+---Authentication Routes
+1. POST /auth/signup - Sign up a new user
+2. POST /auth/login - Log in an existing user
+3. GET /auth/google - Google OAuth login
+4. GET /auth/google/callback - Google OAuth callback
+---Profile Routes
+1. GET /profile - Fetch user profile
+2. PUT /profile - Update user profile
+3. POST /profile/2fa/setup - Set up 2FA
+4. POST /profile/2fa/verify - Verify 2FA token
+---Follow Routes
+1. POST /follow - Follow a user
+2. POST /unfollow - Unfollow a user
+---Notification Routes
+1. POST /notifications/send - Send notifications
+---Channel Routes
+1. POST /channels - Create a new channel
+2. PUT /channels/:id - Update an existing channel
+3. DELETE /channels/:id - Delete a channel
+4. GET /channels/:id - Get channel information
+5. POST /channels/setAdmin/:channelId/:userId - Set a user as admin
+6. POST /channels/unsetAdmin/:channelId/:userId - Unset a user as admin
+7. POST /channels/mute/:channelId/:userId - Mute a user
+8. POST /channels/unmute/:channelId/:userId - Unmute a user
+9. POST /channels/ban/:channelId/:userId - Ban a user
+10. POST /channels/unban/:channelId/:userId - Unban a user
+11. POST /channels/suspend/:id - Suspend a channel
+12. POST /channels/setTitle/:id - Set channel title
+13. POST /channels/setDescription/:id - Set channel description
+
+
